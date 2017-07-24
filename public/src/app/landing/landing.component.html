@@ -1,3 +1,24 @@
-<p>
-  landing works!
-</p>
+<div id='container'>
+	<a [routerLink]="['/register']">Register</a>
+
+	<form (submit) = "search(); form.reset" #form='ngForm' id='search'>
+		<input type="number" name="radius"
+		required
+		max="25" 
+		[(ngModel)]='newSearch.radius'
+		#radius='ngModel'
+		>
+		Miles radius
+		<br>
+		<span *ngIf='radius.errors?.required && (radius.dirty || radius.touched)'><p>Please enter a radius to search</p></span>
+		<span *ngIf='radius.errors?.max && (radius.dirty || radius.touched)'><p>Up to 25 miles</p></span>
+		<input [disabled]='!form.valid' type="submit" value="IDK, Up to Us">
+	</form>
+
+	<div id='map'>
+		<app-map></app-map>
+	</div>
+
+	<button (click) = "pick_again()">Pick Again</button>
+
+</div>
