@@ -13,7 +13,6 @@ import { LoginregComponent } from './loginreg/loginreg.component';
 import { LoginComponent } from './loginreg/login/login.component';
 import { RegComponent } from './loginreg/reg/reg.component';
 import { UserComponent } from './user/user.component';
-import { SerachComponent } from './user/serach/serach.component';
 import { UpdateComponent } from './user/update/update.component';
 
 import { YelpService } from './yelp.service';
@@ -30,7 +29,7 @@ import { UserService } from './user/user.service';
     LoginComponent,
     RegComponent,
     UserComponent,
-    SerachComponent,
+    SearchComponent,
     UpdateComponent
   ],
   imports: [
