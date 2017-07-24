@@ -3,7 +3,7 @@ let path = require('path');
 let fs = require('fs');
 
 
-mongoose.connect('mongodb://admin:Chipotle@ds111123.mlab.com:11123/idkup2us');
+mongoose.connect('mongodb://admin:@ds111123.mlab.com:11123/idkup2us');
 
 let models_path = path.join(__dirname, '../models/');
 
