@@ -9,12 +9,14 @@ import { LoginregComponent } from './loginreg/loginreg.component';
 import { LoginComponent } from './loginreg/login/login.component';
 import { RegComponent } from './loginreg/reg/reg.component';
 import { UserComponent } from './user/user.component';
-import { SerachComponent } from './user/serach/serach.component';
 import { UpdateComponent } from './user/update/update.component';
 
 
 const routes: Routes = [
- {},
+ { path: '', pathMatch: 'full', component: LandingComponent },
+ { path: 'login', component: LoginregComponent},
+ { path: 'search', component: LoginregComponent},
+ { path: 'user/:user_id', component: UpdateComponent},
 ];
 
 @NgModule({
