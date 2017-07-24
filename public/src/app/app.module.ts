@@ -9,9 +9,7 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { SearchComponent } from './landing/search/search.component';
 import { MapComponent } from './landing/map/map.component';
-import { LoginregComponent } from './loginreg/loginreg.component';
-import { LoginComponent } from './loginreg/login/login.component';
-import { RegComponent } from './loginreg/reg/reg.component';
+import { RegComponent } from './reg/reg.component';
 import { UserComponent } from './user/user.component';
 import { UpdateComponent } from './user/update/update.component';
 
@@ -25,8 +23,6 @@ import { UserService } from './user/user.service';
     LandingComponent,
     SearchComponent,
     MapComponent,
-    LoginregComponent,
-    LoginComponent,
     RegComponent,
     UserComponent,
     SearchComponent,
