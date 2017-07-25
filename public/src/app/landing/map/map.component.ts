@@ -30,7 +30,10 @@ export class MapComponent implements OnInit {
 
   			var marker = new google.maps.Marker({
   				map: map,
-  				position: geolocate
+  				position: geolocate,
+  				icon: '../assets/static/images/person_icon.png',
+  				animation: google.maps.Animation.DROP
+
   			})
 
   		map.setCenter(geolocate)
@@ -55,7 +58,7 @@ export class MapComponent implements OnInit {
   				map: map,
   				position: geolocate,
   				content:
-  					'<h1>Default location set to Downtown Los Angeles. Please allow website to access your location</h1>'
+  					'<p>Default location set to Downtown Los Angeles. Please allow website to access your location</p>'
   			})
 
   		map.setCenter(geolocate)

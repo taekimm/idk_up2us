@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+	
+	userid;
+	
 	newSearch = {
-		radius: 0,
+		radius: ''
 	}
 
 	user = {
