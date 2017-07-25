@@ -1,0 +1,9 @@
+/**{
+	outline: 1px dotted red;
+}
+*/
+.center-block{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
