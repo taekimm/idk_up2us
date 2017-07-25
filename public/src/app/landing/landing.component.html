@@ -1,24 +1,84 @@
 <div id='container'>
-	<a [routerLink]="['/register']">Register</a>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<p class="navbar-brand" href="#">IDK, Up to You</p>
+			</div>
+			<form class="navbar-form navbar-right"
+			(submit) = "login(); form.reset" #loginform='ngForm' id='login'>
+				<div class='form-group'>
+					<input type="text" class="form-control" name="email"
+					required
+					[ngModel]='user.email'
+					placeholder="email">
+				</div>
+				<div class='form-group'>
+					<input type="password" class="form-control" name="password"
+					required
+					[ngModel]='user.password'
+					placeholder='password'>
+				</div>
+				<div class='form-group'>
+					<div class="input-group-btn-right">
+						<button class="btn btn-default" type="submit">
 
-	<form (submit) = "search(); form.reset" #form='ngForm' id='search'>
-		<input type="number" name="radius"
-		required
-		max="25" 
-		[(ngModel)]='newSearch.radius'
-		#radius='ngModel'
-		>
-		Miles radius
-		<br>
-		<span *ngIf='radius.errors?.required && (radius.dirty || radius.touched)'><p>Please enter a radius to search</p></span>
-		<span *ngIf='radius.errors?.max && (radius.dirty || radius.touched)'><p>Up to 25 miles</p></span>
-		<input [disabled]='!form.valid' type="submit" value="IDK, Up to Us">
-	</form>
+							<i class="glyphicon glyphicon-log-in"></i>
+						</button>
+					</div>
+				</div>
+				<div class='form-group'>
+					<button class="btn btn-default">
+						<a [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+					</button>
+				</div>
+			</form>
+		</div>
+	</nav>
 
-	<div id='map'>
-		<app-map></app-map>
+	<div class='row' id = 'search'>
+		<div class='col-xs-2'>
+		</div>
+		<div class='col-xs-8'>
+			<div class='form-inline'>
+				<form (submit) = "search(); form.reset" #searchform='ngForm' id='search'>
+					<div class='input-group'>
+						<input type="number" class='form-control' name="radius"  placeholder='Search within 25 mile radius'
+						required
+						max="25" 
+						[(ngModel)]='newSearch.radius'
+						#radius='ngModel'
+						>
+						<div class='input-group-btn'>
+							<button class='btn btn-default' type='submit'>
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class='col-xs-2'>
+		</div>
 	</div>
 
-	<button (click) = "pick_again()">Pick Again</button>
+	<div class='row' id='map'>
+		<div class='col-xs-2'>
+		</div>
+		<div class='col-xs-8'>
+			<app-map></app-map>
+		</div>
+		<div class='col-xs-2'>
+		</div>
+	</div>
+
+	<div class='row' id = 'button'>
+		<div class='col-xs-2'>
+		</div>
+		<div class='col-xs-8'>
+			<button class="btn btn-primary" (click) = "pick_again()">Pick Again</button>
+		</div>
+		<div class='col-xs-2'>
+		</div>
+	</div>
 
 </div>
