@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+
 declare var google: any;
 
 @Component({
@@ -8,44 +10,58 @@ declare var google: any;
 })
 export class MapComponent implements OnInit {
 
-	currPosition = {
-		Lat: 34.054322,
-		Long: -118.259327
-	}
-
-	testPosition = {
-		Lat: 0,
-		Long: 0
-	}
-
-
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
 
-  	this.test();
-  	console.log(this.currPosition)
-  	console.log(this.testPosition)
+  	if(!!navigator.geolocation){
+  		var map;
 
-  	var mapProp = {
-  		center: new google.maps.LatLng(this.currPosition.Lat, this.currPosition.Long),
-  		zoom: 15,
-  		mapTypeId: google.maps.MapTypeId.ROADMAP
-  	};
-  	var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  		var mapOptions = {
+  			zoom: 15,
+  			mapTypeId: google.maps.MapTypeId.ROADMAP
+  		};
 
-  }
+  		map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
+  		navigator.geolocation.getCurrentPosition(function(position) {
+  			var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-	c(pos){
-		console.log(pos.coords.latitude)
-		console.log(pos.coords.longitude)
-		this.testPosition.Lat = pos.coords.latitude;
-		this.testPosition.Long = pos.coords.longitude;
-	}
+  			var marker = new google.maps.Marker({
+  				map: map,
+  				position: geolocate
+  			})
 
-  test(){
-  	navigator.geolocation.getCurrentPosition(this.c)
+  		map.setCenter(geolocate)
+
+  		});
+
+  	} else {
+
+  		var map;
+
+  		var mapOptions = {
+  			zoom: 15,
+  			mapTypeId: google.maps.MapTypeId.ROADMAP
+  		};
+
+  		map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+
+  		navigator.geolocation.getCurrentPosition(function(position) {
+  			var geolocate = new google.maps.LatLng(34.054322, -118.259327);
+
+  			var infowindow = new google.maps.InfoWindow({
+  				map: map,
+  				position: geolocate,
+  				content:
+  					'<h1>Default location set to Downtown Los Angeles. Please allow website to access your location</h1>'
+  			})
+
+  		map.setCenter(geolocate)
+
+  		});
+  	}
 
   }
 
