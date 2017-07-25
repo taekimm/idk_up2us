@@ -14,7 +14,7 @@ const routes: Routes = [
  { path: '', pathMatch: 'full', component: LandingComponent },
  { path: 'register', component: RegComponent},
  { path: 'search', component: SearchComponent},
- { path: 'user/:user_id', component: UpdateComponent},
+ { path: 'user', component: UpdateComponent},
 ];
 
 @NgModule({
