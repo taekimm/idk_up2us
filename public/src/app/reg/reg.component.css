@@ -1,6 +1,19 @@
 .container {
   padding: 5px;
+
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .zoom {
   zoom: 120%
+}
+#legend {
+  background-color: #ffe9e5
+}
+img {
+  width: 40px;
+  height:30px;
+  padding-right: 10px;
+  opacity: 0.30;
+  float: right;
 }
