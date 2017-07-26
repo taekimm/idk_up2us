@@ -9,70 +9,108 @@ declare var google: any;
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-coordinates = {
-  lat: 0,
-  long: 0
-}
+coordinates;
+test = [
+  {name: 'Wild Carvery',
+  position: {lat: 34.180654 , lng: -118.308667 },
+  },
+  {name: 'Flavor of India',
+  position: {lat: 34.1813745 , lng: -118.3104111 },
+  },
+  {name: "Ike's",
+  position: {lat: 34.1826232 , lng: -118.3107433 },
+  },
+  {name: "Kabuki",
+  position: {lat: 34.181598 , lng: -118.309924 },
+  },
+  {name: "PizzaRev",
+  position: {lat: 34.182149 , lng: -118.311350 },
+  },
+  {name: "Chipotle",
+  position: {lat: 34.181891 , lng: -118.311340 },
+  },
+  {name: "CPK",
+  position: {lat: 34.184474 , lng: -118.314097 },
+  },
+]
+
   constructor(private _mapsService: MapsService) { 
   }
 
 
   ngOnInit() {
     this._mapsService.getCoordinates()
-    .then(adsf => { console.log(adsf)} )
-    .catch(err => {console.log(err)})
+    .then( position => { 
+      this.coordinates = position;
+      var map;
 
-  	if(!!navigator.geolocation){
-  		var map;
+      var mapOptions = {
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
 
-  		var mapOptions = {
-  			zoom: 15,
-  			mapTypeId: google.maps.MapTypeId.ROADMAP
-  		};
+      map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
-  		map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+      var geolocate = new google.maps.LatLng(this.coordinates.coords.latitude, this.coordinates.coords.longitude)
 
-  		navigator.geolocation.getCurrentPosition(function(position) {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: geolocate,
+        icon: '../assets/static/images/person_icon.png',
+        animation: google.maps.Animation.BOUNCE
+      });
 
-        var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      let markerarray = [];
 
-  			var marker = new google.maps.Marker({
-  				map: map,
-  				position: geolocate,
-  				icon: '../assets/static/images/person_icon.png',
-  				animation: google.maps.Animation.DROP
+      for (let i = 0; i < this.test.length; i++){
+        var testmarker = new google.maps.Marker({
+          map: map,
+          title: this.test[i].name,
+          position: this.test[i].position,
+          icon: '../assets/static/images/restaurant_logo.png',
+          animation: google.maps.Animation.BOUNCE
+        });
+        markerarray.push(testmarker)
+      }
 
-  			});
+      markerarray = shuffle(markerarray)
 
-  		map.setCenter(geolocate)
+      var pick = markerarray[markerarray.length-1]
 
-  		});
+      var infowindow = new google.maps.InfoWindow({
+        content: pick.title
+      })
 
-  	} else {
+      for (let j = 0; j < markerarray.length; j++) {
+        if( j < markerarray.length-1){
+          setTimeout( () => {
+            markerarray[j].setMap(null)
+          }, 3000 + (j * 1000));
+        }
+        else {
+          setTimeout( () => {
+            infowindow.open(map, pick);
+          }, 3000 + ((j-1) * 1000));
+        }
+      }
 
-  		var map;
+      function shuffle(arr) {
+        var m = arr.length, t, i;
+        while (m) {
+          i = Math.floor(Math.random() * m--);
+          t = arr[m];
+          arr[m] = arr[i];
+          arr[i] = t
+        }
+        return arr
+      }
 
-  		var mapOptions = {
-  			zoom: 15,
-  			mapTypeId: google.maps.MapTypeId.ROADMAP
-  		};
+      map.setCenter(geolocate)
 
-  		map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+    })
 
-  		navigator.geolocation.getCurrentPosition(function(position) {
-  			var geolocate = new google.maps.LatLng(34.054322, -118.259327);
+    .catch(err => document.getElementById('googleMap').innerHTML = "Mamma mia! We can't access your current location! This website requires your location to run properly.")
 
-  			var infowindow = new google.maps.InfoWindow({
-  				map: map,
-  				position: geolocate,
-  				content:
-  					'<p>Default location set to Downtown Los Angeles. Please allow website to access your location</p>'
-  			})
-
-  		map.setCenter(geolocate)
-
-  		});
-  	}
 
   }
 
