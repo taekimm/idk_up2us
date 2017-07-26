@@ -3,17 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
-import { SearchComponent } from './landing/search/search.component';
 import { MapComponent } from './landing/map/map.component';
 import { RegComponent } from './reg/reg.component';
 import { UserComponent } from './user/user.component';
+import { UserSearchComponent } from './user/usersearch/usersearch.component';
 import { UpdateComponent } from './user/update/update.component';
 
 
 const routes: Routes = [
  { path: '', pathMatch: 'full', component: LandingComponent },
  { path: 'register', component: RegComponent},
- { path: 'search', component: SearchComponent},
+ { path: 'search', component: UserSearchComponent},
  { path: 'user', component: UpdateComponent},
 ];
 

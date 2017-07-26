@@ -7,10 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
-import { SearchComponent } from './landing/search/search.component';
 import { MapComponent } from './landing/map/map.component';
 import { RegComponent } from './reg/reg.component';
 import { UserComponent } from './user/user.component';
+import { UserSearchComponent } from './user/usersearch/usersearch.component';
 import { UpdateComponent } from './user/update/update.component';
 
 import { YelpService } from './yelp.service';
@@ -21,12 +21,11 @@ import { UserService } from './user/user.service';
   declarations: [
     AppComponent,
     LandingComponent,
-    SearchComponent,
     MapComponent,
     RegComponent,
     UserComponent,
-    SearchComponent,
-    UpdateComponent
+    UpdateComponent,
+    UserSearchComponent,
   ],
   imports: [
     BrowserModule,
