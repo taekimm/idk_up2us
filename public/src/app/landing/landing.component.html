@@ -2,13 +2,13 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<p class="navbar-brand" href="#">IDK, Up to You</p>
+				<p class="navbar-brand" href="#"><img src="../assets/static/images/30.png"/></p>
 			</div>
 			<form class="navbar-form navbar-right"
 			(submit) = "login(); form.reset" #loginform='ngForm' id='login'>
 				<div
 				*ngIf='!userid'
-				[ngClass]="{'has-error':email.errors && (email.dirty || email.touched), 'has-success':!email.errors && (email.dirty || email.touched)}" 
+				[ngClass]="{'has-error':email.errors && (email.dirty || email.touched), 'has-success':!email.errors && (email.dirty || email.touched)}"
 				class='form-group email has-feedback'>
 					<input  type="text" class="form-control" name="email"
 					required
@@ -38,7 +38,7 @@
 					</button>
 					<button *ngIf='userid' class="btn btn-default">
 						<a [routerLink]="['/logout']"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-					</button>	
+					</button>
 				</div>
 			</form>
 		</div>
