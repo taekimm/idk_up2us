@@ -2,36 +2,23 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs'
 
-declare var google: any;
-
 @Injectable()
 export class MapsService {
 
-  constructor() { }
- //  createMap() {
- //  	var map;
-
-	// var mapOptions = {
-	// 	zoom: 15,
-	// 	mapTypeId: google.maps.MapTypeId.ROADMAP
-	// };
-
-	// map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
-
-	// navigator.geolocation.getCurrentPosition(function(position) {
-	// 	var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-	// 	var marker = new google.maps.Marker({
-	// 		map: map,
-	// 		position: geolocate
-	// 	})
-
-	// map.setCenter(geolocate)
-
-	// // });
-	// // return this
-	// // 	.map(data => data.json())
-	// // 	.toPromise()
- //  }
+  constructor(private _http: Http) { }
+  getCity(lat, long) {
+  	return this._http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + long + "&sensor=true")
+  		.map(data => data.json())
+  		.toPromise()
+  }
+  
+  getCoordinates(){
+  	return new Promise( (resolve, reject) => {
+  		navigator.geolocation.getCurrentPosition( function (position) {
+  			resolve(position)
+  			reject('error in promise')
+  		})
+  	})
+  }
 
 }
