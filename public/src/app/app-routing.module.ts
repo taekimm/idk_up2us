@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
-import { SearchComponent } from './landing/search/search.component';
 import { MapComponent } from './landing/map/map.component';
 import { RegComponent } from './reg/reg.component';
 import { UserComponent } from './user/user.component';
