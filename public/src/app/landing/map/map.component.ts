@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MapsService } from '../../maps.service'
 
 declare var google: any;
 
@@ -9,11 +9,18 @@ declare var google: any;
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-
-  constructor() { 
+coordinates = {
+  lat: 0,
+  long: 0
+}
+  constructor(private _mapsService: MapsService) { 
   }
 
+
   ngOnInit() {
+    this._mapsService.getCoordinates()
+    .then(adsf => { console.log(adsf)} )
+    .catch(err => {console.log(err)})
 
   	if(!!navigator.geolocation){
   		var map;
@@ -26,7 +33,8 @@ export class MapComponent implements OnInit {
   		map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
   		navigator.geolocation.getCurrentPosition(function(position) {
-  			var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+        var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
   			var marker = new google.maps.Marker({
   				map: map,
@@ -34,7 +42,7 @@ export class MapComponent implements OnInit {
   				icon: '../assets/static/images/person_icon.png',
   				animation: google.maps.Animation.DROP
 
-  			})
+  			});
 
   		map.setCenter(geolocate)
 
