@@ -16,7 +16,7 @@ export class MapsService {
   	return new Promise( (resolve, reject) => {
   		navigator.geolocation.getCurrentPosition( function (position) {
   			resolve(position)
-  			reject(console.log('test'))
+  			reject()
   		})
   	})
   }
