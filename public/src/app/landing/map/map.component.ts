@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MapsService } from '../../maps.service'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MapsService } from '../../maps.service';
+import { YelpService } from '../../yelp.service';
+import { Subscription } from 'rxjs/Subscription'
 
 declare var google: any;
 
@@ -9,22 +11,24 @@ declare var google: any;
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-coordinates;
-// userzipcode;
-// test = [
+  
+  coordinates;
 
-// ]
+  @Input() YelpList: Array<any> = [];
 
   @Output() LocationtoParent = new EventEmitter()
 
-  constructor(private _mapsService: MapsService) { 
+  constructor(
+    private _mapsService: MapsService,
+    private _yelpService: YelpService
+    ) { 
   }
 
 
   ngOnInit() {
-    
     this._mapsService.getCoordinates()
     .then( position => { 
+
       this.coordinates = position;
 
       this.LocationtoParent.emit(position);
@@ -48,53 +52,6 @@ coordinates;
         animation: google.maps.Animation.BOUNCE
       });
 
-      // //code for post-business find
-      // let businessMarkers = [];
-
-      // for (let i = 0; i < this.buisness_List.length; i++){
-      //   var testmarker = new google.maps.Marker({
-      //     map: map,
-      //     title: this.buisness_List[i].name,
-      //     position: this.buisness_List[i].position,
-      //     icon: '../assets/static/images/restaurant_logo.png',
-      //     animation: google.maps.Animation.BOUNCE
-      //   });
-      //   businessMarkers.push(testmarker)
-      // }
-
-      // businessMarkers = shuffle(businessMarkers)
-
-      // var pick = businessMarkers[businessMarkers.length-1]
-
-      // var infowindow = new google.maps.InfoWindow({
-      //   content: pick.title
-      // })
-
-      // for (let j = 0; j < businessMarkers.length; j++) {
-      //   if( j < businessMarkers.length-1){
-      //     setTimeout( () => {
-      //       businessMarkers[j].setMap(null)
-      //     }, 3000 + (j * 1000));
-      //   }
-      //   else {
-      //     setTimeout( () => {
-      //       infowindow.open(map, pick);
-      //     }, 3000 + ((j-1) * 1000));
-      //   }
-      // }
-
-      // function shuffle(arr) {
-      //   var m = arr.length, t, i;
-      //   while (m) {
-      //     i = Math.floor(Math.random() * m--);
-      //     t = arr[m];
-      //     arr[m] = arr[i];
-      //     arr[i] = t
-      //   }
-      //   return arr
-      // }
-      // //code for post-buisness find
-
       map.setCenter(geolocate)
 
       //code for finding zipcode (no longer needed)
@@ -109,17 +66,11 @@ coordinates;
     })
 
     .catch(err => document.getElementById('googleMap').innerHTML = "Mamma mia! We can't access your current location! This website requires your location to run properly.")
-
   }
-  test(businesslist){
-    console.log('received from parent')
-  }
+  
 
   MakeBuisnessMap(businessList){
-      console.log('received from parent')
-      let business_List = businessList;
-      console.log(business_List)
-
+    console.log(businessList)
       var map;
 
       var mapOptions = {
@@ -142,11 +93,11 @@ coordinates;
       // //code for post-business find
       let businessMarkers = [];
 
-      for (let i = 0; i < business_List.length; i++){
+      for (let i = 0; i < businessList.length; i++){
         var testmarker = new google.maps.Marker({
           map: map,
-          title: business_List[i].name,
-          position: business_List[i].position,
+          title: businessList[i].name,
+          position: businessList[i].position,
           icon: '../assets/static/images/restaurant_logo.png',
           animation: google.maps.Animation.BOUNCE
         });
