@@ -10,6 +10,7 @@ declare var google: any;
 })
 export class MapComponent implements OnInit {
 coordinates;
+userzipcode;
 test = [
   {name: 'Wild Carvery',
   position: {lat: 34.180654 , lng: -118.308667 },
@@ -39,6 +40,7 @@ test = [
 
 
   ngOnInit() {
+    
     this._mapsService.getCoordinates()
     .then( position => { 
       this.coordinates = position;
@@ -107,10 +109,17 @@ test = [
 
       map.setCenter(geolocate)
 
+      this._mapsService.getCity(this.coordinates.coords.latitude, this.coordinates.coords.longitude)
+        .then( data => {
+          var address = data.results[0].address_components
+          var zipcode = address[address.length - 1].long_name
+          this.userzipcode = zipcode          
+        })
+        .catch( err => console.log(err))
+
     })
 
     .catch(err => document.getElementById('googleMap').innerHTML = "Mamma mia! We can't access your current location! This website requires your location to run properly.")
-
 
   }
 
