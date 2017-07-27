@@ -6,6 +6,15 @@ const User = mongoose.model('User');
 //if using bcrypt:
 const bcrypt = require('bcrypt');
 
+const yelp = require('yelp-fusion');
+
+const token = yelp.accessToken('FXp2QyAtNItDNpVQLFTapQ', 'Fkxzml5t2gGfmeQJDU906nQi07vbAol98imOQ4RVka1SURLi8nkk4Voo1cCKorBr').then(response => {
+		  console.log(response.jsonBody.access_token);
+		}).catch(e => {
+		  console.log(e);
+		});
+
+
 module.exports = {
 	getusers: (req, res) => {
 		User.find({}, (err, userslist) => {
@@ -31,7 +40,7 @@ module.exports = {
 				}
 				errors.push('User with that email already exists')
 				return res.status(400).send(errors);
-			} 
+			}
 			//all good
 			else {
 				req.session.user = newUser
@@ -49,9 +58,9 @@ module.exports = {
 				let errors = [];
 				for(let i in err.errors){
 					errors.push(err.errors[i].message)
-				}		
+				}
 				return res.status(400).send(errors);
-			} 
+			}
 
 			//if no found person is returned (i.e., does not exist)
 			if ( foundPerson == null) {
@@ -66,7 +75,7 @@ module.exports = {
 					req.session.user = foundPerson
 					//return foundPerson as JSON
 					return res.json(foundPerson)
-				} 
+				}
 				//password check failed
 				else{
 					let errors = ["Login Authorization Failed"];
@@ -78,5 +87,22 @@ module.exports = {
 
 	logout : (req, res) => {
 		delete req.session
+	},
+
+	yelpSearch : (req, res) => {
+		const client = yelp.client('2Zpt-BoHdL-XOPH12z47CG2v-xtQytuKVA8qZJfONBtcT0hCjlTInu_tjylY6i4tYLENhc80wlI56TV9sUdoauGy6NnQ074S0x8whwNovCH1ANvbM0rW7LW99UN5WXYx');
+			client.search({
+			  term:'restaurant',
+			  location: '90501',
+			  latitude: '34.181057',
+			  longitude: '-118.309190',
+			  price: 2
+			})
+			.then(response => {
+			  return res.json(response);
+			})
+			.catch(e => {
+			  console.log(e);
+			});
 	},
 }

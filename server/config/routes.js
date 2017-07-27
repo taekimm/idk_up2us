@@ -6,4 +6,5 @@ module.exports = app => {
 	app.post('/api/register', controller.register);
 	app.post('/api/login', controller.login);
 	app.get('/api/logout', controller.logout);
+	app.get('/api/yelp', controller.yelpSearch)
 }
