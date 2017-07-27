@@ -1,0 +1,109 @@
+/*$font-size: 20px;
+$star-width: 1.5em;
+
+body { 
+  padding: 20px; 
+  font-size: $font-size;
+}
+
+.rating {
+  margin: 10px 0;
+}
+
+.rating i {
+  display: inline-block;
+  width: 0;
+  height: $star-width;
+  border-width: 0 ( $star-width / 2 );
+  border-style: solid;
+  border-color: #eee;
+  border-radius: .22em;
+  color: white;
+  background: #eee;
+  font-style: normal;
+  line-height: $star-width + 0.1em;
+  text-indent: -0.5em;
+  text-shadow: 1px 0 1px hsl(0, 0%, 70%);
+}*/
+
+
+/** Colors 
+
+@function stars-color($num) {
+  $colors: #cc8b1f #dcb228 #f0991e #f26a2c #dd050b;
+  @return if($num <= length($colors), nth($colors, $num), #333);
+}
+
+@for $i from 1 to 5 {
+  @for $j from 1 through $i {
+    [data-rating^='#{$i}'] .star-#{$j} {
+      border-color: stars-color($i);
+      // set background to avoid tiny lines between borders in print.
+      background: stars-color($i);
+    }
+  }
+  [data-rating^='#{$i}.5'] .star-#{$i+1} {
+    border-left-color: stars-color($i);
+  }
+}
+
+[data-rating="5"] i {
+  $color: stars-color(5);
+  background: $color;
+  border-color: $color;
+}
+
+
+/** Print */
+
+/*@media print {
+  .rating {
+    -webkit-print-color-adjust: exact;
+    i {
+      text-shadow: none;
+    }
+  }
+}*/
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
