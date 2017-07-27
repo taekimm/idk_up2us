@@ -9,9 +9,9 @@ const bcrypt = require('bcrypt');
 const yelp = require('yelp-fusion');
 
 const token = yelp.accessToken('FXp2QyAtNItDNpVQLFTapQ', 'Fkxzml5t2gGfmeQJDU906nQi07vbAol98imOQ4RVka1SURLi8nkk4Voo1cCKorBr').then(response => {
-		  console.log(response.jsonBody.access_token);
+		  // console.log(response.jsonBody.access_token);
 		}).catch(e => {
-		  console.log(e);
+		  // console.log(e);
 		});
 
 
@@ -93,10 +93,33 @@ module.exports = {
 		const client = yelp.client('2Zpt-BoHdL-XOPH12z47CG2v-xtQytuKVA8qZJfONBtcT0hCjlTInu_tjylY6i4tYLENhc80wlI56TV9sUdoauGy6NnQ074S0x8whwNovCH1ANvbM0rW7LW99UN5WXYx');
 			client.search({
 			  term:'restaurant',
-			  location: '90501',
-			  latitude: '34.181057',
-			  longitude: '-118.309190',
-			  price: 2
+			  limit: 40,
+			  latitude: 34.1808279,
+			  longitude: -118.30909949999999,
+			  radius: 5000
+			})
+			.then(response => {
+			  return res.json(response);
+			})
+			.catch(e => {
+			  console.log(e);
+			});
+	},
+
+	yelpSearchPOST : (req, res) => {
+		console.log(req.body)
+		let userRadius = req.body.radius;
+		let userLat = req.body.lat
+		let userLong = req.body.long
+		console.log(userRadius, userLat, userLong)
+
+		const client = yelp.client('2Zpt-BoHdL-XOPH12z47CG2v-xtQytuKVA8qZJfONBtcT0hCjlTInu_tjylY6i4tYLENhc80wlI56TV9sUdoauGy6NnQ074S0x8whwNovCH1ANvbM0rW7LW99UN5WXYx');
+			client.search({
+			  term:'restaurant',
+			  limit: 40,
+			  latitude: userLat,
+			  longitude: userLong,
+			  radius: userRadius
 			})
 			.then(response => {
 			  return res.json(response);

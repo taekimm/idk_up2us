@@ -49,17 +49,17 @@
 		</div>
 		<div class='col-xs-2' >
 			<div class='form-inline' class='center-block'>
-				<form (submit) = "search(); form.reset" #searchform='ngForm' id='search'>
+				<form  #searchform='ngForm' id='search'>
 					<div class='input-group'>
 						<input type="number" class='form-control input-sm' name="radius"  placeholder='Search within 25 mile radius'
 						required
 						max="25"
-						min='.1'
+						min='.5'
 						[(ngModel)]='newSearch.radius'
 						#radius='ngModel'
 						>
 						<div class='input-group-btn'>
-							<button class='btn btn-sm' type='submit'>
+							<button class='btn btn-sm' (click) = "search(); searchform.reset" form='search'>
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
@@ -76,7 +76,11 @@
 		</div>
 		<div class='col-xs-8'>
 			<div style='text-align: center;' id='map app'>
-				<app-map></app-map>
+				<app-map 
+					(LocationtoParent)='getLocation($event)'
+					(BiztoChild)='test($event)'
+				>	
+				</app-map>
 			</div>
 		</div>
 		<div class='col-xs-2'>
