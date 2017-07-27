@@ -11,7 +11,9 @@ export class MapComponent implements OnInit {
 	newSearch = {
 		radius: .5,
 		lat: 0,
-		long: 0
+		long: 0,
+		categories: String,
+		price: String,	
 	}
 
 	user = {
@@ -47,5 +49,12 @@ export class MapComponent implements OnInit {
 			.catch( err => {
 	  			console.log(err);
 			})
+	}
+
+	getFilter(){
+		this.newSearch.radius = Math.floor(this.newSearch.radius * 1609.34)
+		this.yelpService.getRestaurants(this.newSearch)
+
+
 	}
 }
