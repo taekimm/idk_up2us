@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<p class="navbar-brand" href="#"><img src="../assets/static/images/30.png"/></p>
+				<p class="navbar-brand" href="#"><img id="headerimg" src="../assets/static/images/30.png"/></p>
 			</div>
 			<form class="navbar-form navbar-right"
 			(submit) = "login(); form.reset" #loginform='ngForm' id='login'>
@@ -55,7 +55,7 @@
 						required
 						max="25"
 						min='.5'
-						[(ngModel)]='newSearch.radius'
+						[(ngModel)]='radiusforsearch'
 						#radius='ngModel'
 						>
 						<div class='input-group-btn'>
@@ -72,14 +72,21 @@
 	</div>
 
 	<div class='row' id='map'>
-		<div class='col-xs-2'>
-		</div>
 		<div class='col-xs-8'>
 			<div style='text-align: center;' id='map app'>
-				<div id="googleMap" style="width:100%;height:400px"><p>Mamma mia! We can't access your current location! This website requires your location to run properly.</p></div>
+				<div id="googleMap" style="width:100%;height:400px">
+					<p>Mamma mia! We can't access your current location! This website requires your location to run properly.</p>
+				</div>
 			</div>
 		</div>
-		<div class='col-xs-2'>
+		<div class='col-xs-4' id='infobox'>
+			<div *ngIf=YelpList[0]>
+				<p>{{YelpList[0].name}}</p>
+				<div class='col-xs-4'>
+					<img class="img-responsive" id='yelpimage' [src]="YelpList[0].image_url">
+					<p>{{YelpList[0].name}}</p>
+				</div>
+			</div>
 		</div>
 	</div>
 
