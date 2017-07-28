@@ -20,7 +20,7 @@ export class LandingComponent implements OnInit {
 	coordinates;
 
 	YelpList: Array<any> = [];
-	
+
 	newSearch = {
 		radius: .5,
 		lat: 0,
@@ -43,12 +43,12 @@ export class LandingComponent implements OnInit {
 
   ngOnInit() {
   	this._mapsService.getCoordinates()
-    .then( position => { 
+    .then( position => {
 
       this.coordinates = position;
       this.newSearch.lat = this.coordinates.coords.latitude;
 	  this.newSearch.long = this.coordinates.coords.longitude;
-      
+
       var map;
 
       var mapOptions = {
@@ -81,11 +81,11 @@ export class LandingComponent implements OnInit {
 		}
 
 		this.newSearch.radius = Math.floor(this.radiusforsearch * 1609.34)
-		
+
 		if(this.newSearch.radius > 40000 ){
 			this.newSearch.radius = 40000
 		}
-		
+
 		this._yelpService.getRestaurants(this.newSearch)
 			.then( response => {
 				for (let i = 0; i < response.jsonBody.businesses.length; i++){
@@ -94,14 +94,14 @@ export class LandingComponent implements OnInit {
 				this.YelpList = shuffle(this.YelpList)
 
 				let businessMarkers = [];
-			      
+
 			    for (let i = 0; i < this.YelpList.length; i++){
-			      	
+
 			      	var LatLng = {lat: this.YelpList[i].coordinates.latitude, lng: this.YelpList[i].coordinates.longitude}
-			        
-			      	// var title = 
+
+			      	// var title =
 			      	// 	'<h3>' + this.YelpList[i].name + '</h3><br>' +
-			      	// 	'<img style="width:150px;" src="' + this.YelpList[i].image_url + '"><br>' + 
+			      	// 	'<img style="width:150px;" src="' + this.YelpList[i].image_url + '"><br>' +
 			      	// 	'<p>Rating: ' + this.YelpList[i].rating + '</p>'
 
 			        var testmarker = new google.maps.Marker({
@@ -158,5 +158,5 @@ export class LandingComponent implements OnInit {
 	pick_again(){
 		this.search();
 	}
-	
+
 }
