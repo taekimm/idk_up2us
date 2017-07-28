@@ -128,4 +128,37 @@ module.exports = {
 			  console.log(e);
 			});
 	},
+
+	yelpUserSearch: (req, res) =>{
+		console.log(req.body)
+		let userRadius = req.body.radius;
+		let userLat = req.body.lat;
+		let userLong = req.body.long;
+		console.log(userRadius, userLat, userLong)
+		if(req.body.categories){
+			let userCategories = req.body.categories;
+		}
+		if(req.body.price){
+			let userPrice = req.body.price;
+		}
+		if(req.body.open){
+			let userOpen = req.body.open;
+		}
+
+		const client = yelp.client('2Zpt-BoHdL-XOPH12z47CG2v-xtQytuKVA8qZJfONBtcT0hCjlTInu_tjylY6i4tYLENhc80wlI56TV9sUdoauGy6NnQ074S0x8whwNovCH1ANvbM0rW7LW99UN5WXYx');
+		client.search({
+			term: 'reestaurant',
+			limit: 
+			latitude: userLat,
+			longitude: userLong,
+			radius: userRadius,
+			categories:
+		})
+		.then(response =>{
+			return res.json(response);
+		}) 
+		.catch(e => {
+			console.log(e);
+		});
+	}
 }
