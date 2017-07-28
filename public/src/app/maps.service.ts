@@ -13,12 +13,16 @@ export class MapsService {
   }
   
   getCoordinates(){
+
   	return new Promise( (resolve, reject) => {
   		navigator.geolocation.getCurrentPosition( function (position) {
   			resolve(position)
   			reject()
-  		})
-  	})
+  		}, () => {
+        //show popup
+      }, {enableHighAccuracy: true} )
+  	
+    })
   }
 
 }
