@@ -8,14 +8,11 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 let UserSchema = new Schema({
-	f_name: {
+
+	username: {
 		type: String, 
-		required: [true, 'Please insert a first name']
-	},
-	
-	l_name: {
-		type: String, 
-		required: [true, 'Please insert a last name']
+		required: [true, 'Please insert an user name'],
+		unique: true,
 	},
 	
 	email: {
@@ -27,7 +24,6 @@ let UserSchema = new Schema({
 			},
 			message: "Please insert a valid email"
 		},
-		unique: true,
 	},
 	
 	password: {
