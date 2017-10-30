@@ -10,21 +10,13 @@
 						<div *ngIf=YelpList[0]>
 							<mat-card id="sideBar">
 								<mat-card-content>
-									<!-- <div id='imgbox'>
-										<img class="img-responsive" id='yelpimage' [src]="YelpList[0].image_url">
+									<mat-card-content>
 										<a [href]='YelpList[0].url'>{{YelpList[0].name}}</a>
 										<p>Address: {{YelpList[0].location.address1}}, {{YelpList[0].location.address2}} {{YelpList[0].location.address3}} {{YelpList[0].location.city}}, {{YelpList[0].location.state}} {{YelpList[0].location.zip_code}}</p>
-									</div> -->
-									<mat-card-header>
-										<mat-card-title><a [href]='YelpList[0].url'>{{YelpList[0].name}}</a></mat-card-title>
-										<mat-card-subtitle><p>Address: {{YelpList[0].location.address1}}, {{YelpList[0].location.address2}} {{YelpList[0].location.address3}} {{YelpList[0].location.city}}, {{YelpList[0].location.state}} {{YelpList[0].location.zip_code}}</p></mat-card-subtitle>
-									</mat-card-header>
-									<!-- <div id="imgbox">
-										<img class="img-responsive" id='yelpimage' [src]="YelpList[0].image_url">
-									</div> -->
-									<img id='yelpImage' [src]="YelpList[0].image_url">
-									<mat-card-actions *ngIf=!YelpList[1]>
-										<button mat-button (click)="pick_again()">Pick Again</button>
+										<img mat-card-image class="img-responsive" id='yelpImage' [src]="YelpList[0].image_url">
+									</mat-card-content>
+									<mat-card-actions>
+										<button mat-button [disabled]="YelpList[1]" (click)="pick_again()">Pick Again</button>
 									</mat-card-actions>
 								</mat-card-content>
 							</mat-card>
@@ -78,9 +70,6 @@
 									</section>
 									<section>
 										<mat-form-field hintLabel="Categories are seperated by commas">
-											<!-- <label>
-												<p>What categories you're searching for:</p>
-											</label> -->
 											<input 
 												id="categoryInput"
 												matInput
@@ -88,7 +77,7 @@
 												[(ngModel)]="newSearch.categories"
 												#categories='ngModel'
 												placeholder="Categories of food"
-												>
+											>
 										</mat-form-field>
 									</section>
 									<section>

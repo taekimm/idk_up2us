@@ -1,6 +1,3 @@
-/* *{
-	outline: 1px dotted red;
-} */
 
 .loading-indicator {
 	height: 2em;
@@ -24,13 +21,6 @@
 	margin-bottom: 20px;
 }
 
-#imgbox{
-	height: 50%;
-	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-}
 
 #yelpImage {
 	height: 200px;
@@ -48,15 +38,11 @@
 
 #sideBar{
 	height: 400px;
-	width: 100%;
+	width: 400px;
 	justify-content: center;
 	display: flex;
 	align-items: center;
 }
-
-/* #searchBar{
-	margin: auto auto auto auto;
-} */
 
 #categoryInput{
 	width: 100%;
