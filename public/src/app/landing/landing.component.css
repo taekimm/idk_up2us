@@ -1,6 +1,14 @@
-*{
-	outline: 1px dotted red;
-}
+
+.loading-indicator {
+	height: 2em;
+	width: 2em;
+	overflow: show;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+  }
 
 .center-block{
 	display: block;
@@ -13,12 +21,9 @@
 	margin-bottom: 20px;
 }
 
-#imgbox{
-	height: 50%;
-	width: 50%;
-	margin-left: auto;
-	margin-right:auto;
-	display: block;
+
+#yelpImage {
+	height: 200px;
 }
 
 #infobox{
@@ -30,3 +35,76 @@
 	width: 100%;
 	height: 100%;
 }
+
+#sideBar{
+	height: 400px;
+	width: 400px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+
+#categoryInput{
+	width: 100%;
+}
+
+@media screen and (max-width: 599px) {
+	* {
+		font-size: 1rem;
+	}
+	#map {
+		width: 300px;
+		height: 400px;
+		margin: 0px auto 0px auto;
+	}
+	#searchBar {
+		width: 360px;
+		margin: auto;
+	}
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+	* {
+		font-size: 1rem;
+	}
+	#map {
+		width: 700px;
+		height: 400px;
+		margin: 0px auto 0px auto;
+	}
+	#searchBar {
+		width: 360px;
+		margin: auto;
+	}
+	
+}
+
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+	* {
+		font-size: 1rem;
+	}
+	#map {
+		width: 900px;
+		height: 400px;
+		margin: 0px auto 0px auto;
+	}
+	#searchBar {
+		width: 360px;
+		margin: 0px auto 0px auto;
+	}
+}
+
+@media screen and (min-width: 1280px) and (max-width: 5000px) {
+	* {
+		font-size: 1rem;
+	}
+	#map {
+		width: 900px;
+		height: 400px;
+		margin: 0px auto 0px auto;
+	}
+	#searchBar {
+		width: 360px;
+		margin: auto;
+	}
+} 

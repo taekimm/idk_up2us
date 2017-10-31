@@ -1,101 +1,104 @@
 <div id='container'>
-	<mat-grid-list cols="2">
-		<mat-grid-tile
-			[colspan]="1"
-			id='map'>
-			<div id="googleMap">
-				<p>Mamma mia! We can't access your current location! This website requires your location to run properly.</p>
+	<div id="main">
+		<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayout.lg="row" fxFlex>
+			<div fxFlex id="map">
+				<div id="googleMap"></div>
 			</div>
-		</mat-grid-tile>
-		<mat-grid-tile
-				[colspan]="1"
-				>
-			<mat-card>
-				<mat-card-content>
-					<div [(ngSwitch)]="searched">
-						<div *ngSwitchCase=" true ">
-							<div *ngIf=YelpList[0]>
-								<div id='imgbox'>
-									<img class="img-responsive" id='yelpimage' [src]="YelpList[0].image_url">
-									<a [href]='YelpList[0].url'>{{YelpList[0].name}}</a>
-									<p>Address: {{YelpList[0].location.address1}}, {{YelpList[0].location.address2}} {{YelpList[0].location.address3}} {{YelpList[0].location.city}}, {{YelpList[0].location.state}} {{YelpList[0].location.zip_code}}</p>
-								</div>
-							</div>
+			<div fxFlex>
+				<div [(ngSwitch)]="searched" id="sideBar">
+					<div *ngSwitchCase=" true ">
+						<div *ngIf=YelpList[0]>
+							<mat-card id="sideBar">
+								<mat-card-content>
+									<mat-card-content>
+										<a [href]='YelpList[0].url'>{{YelpList[0].name}}</a>
+										<p>Address: {{YelpList[0].location.address1}}, {{YelpList[0].location.address2}} {{YelpList[0].location.address3}} {{YelpList[0].location.city}}, {{YelpList[0].location.state}} {{YelpList[0].location.zip_code}}</p>
+										<img mat-card-image class="img-responsive" id='yelpImage' [src]="YelpList[0].image_url">
+									</mat-card-content>
+									<mat-card-actions>
+										<button mat-button [disabled]="YelpList[1]" (click)="pick_again()">Pick Again</button>
+									</mat-card-actions>
+								</mat-card-content>
+							</mat-card>
 						</div>
-						<div *ngSwitchCase=" false ">
-							<form #searchform='ngForm' id='search'>
-								<label>
-									<p>Select mile radius for search:</p>
-								</label>
-								<mat-slider
-									min='0.5'
-									max='25'
-									step='0.5'
-									name="searchRadiusInMiles"
-									thumbLabel
-									tickInterval=".5"
-									[(ngModel)]='searchRadiusInMiles'
-									[(value)]='searchRadiusInMiles'
-									(click)="radiusChange($event)"
-									(keyup)="radiusChange($event)"
-									(keydown)="radiusChange($event)"
-									>
-								</mat-slider>
-								<label>
-									<p>Select number of results to randomize from:</p>
-								</label>
-								<mat-slider
-									min='10'
-									max='50'
-									step='1'
-									name="limit"
-									thumbLabel
-									tickInterval="1"
-									[(ngModel)]='newSearch.limit'
-									[(value)]='newSearch.limit'
-									>
-								</mat-slider>
-								<mat-form-field>
-									<input 
-										matInput
-										name="term"
-										[(ngModel)]="newSearch.categories"
-										#categories='ngModel'
-										placeholder="What you're searching for: e.g., Mexican or French"
-										>
-									<mat-hint>Categories are seperated by commas; So bars, french will select Bars and French.</mat-hint>
-								</mat-form-field>
-				
-								<label>
-									<p>Price Range: </p>
-								</label>
-								<mat-checkbox [(ngModel)]="price1" [align]="end" [ngModelOptions]="{standalone: true}">$</mat-checkbox>
-								<mat-checkbox [(ngModel)]="price2" [align]="end" [ngModelOptions]="{standalone: true}">$$</mat-checkbox>
-								<mat-checkbox [(ngModel)]="price3" [align]="end" [ngModelOptions]="{standalone: true}">$$$</mat-checkbox>
-								<mat-checkbox [(ngModel)]="price4" [align]="end" [ngModelOptions]="{standalone: true}">$$$$</mat-checkbox>
-								<div class='input-group'>						
-									<div class='input-group-btn'>
-										<button type="button" (click) = "search(); searchform.reset" form='search'>
-											<i class="glyphicon glyphicon-search"></i>
-										</button>
-									</div>
-								</div>
-							</form>
+						<div *ngIf=!YelpList[0] class="loading-indicator">
+							<mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 						</div>
 					</div>
-				</mat-card-content>
-			</mat-card>
-		</mat-grid-tile>
-	</mat-grid-list>
-	
-	<div class='row' id ='button'>
-		<div class='col-xs-2'>
+					<div *ngSwitchCase=" false ">
+						<mat-card id="sideBar">
+							<mat-card-header>
+								<mat-card-title>IDK, Up2Us</mat-card-title>
+								<mat-card-subtitle>Can't pick a place to eat? Let us do it!</mat-card-subtitle>
+							</mat-card-header>
+							<mat-card-content>
+								<form #searchform='ngForm' id='search'>
+									<section>
+										<label>
+											<p>Select mile radius for search:</p>
+										</label>
+										<mat-slider
+											min='0.5'
+											max='25'
+											step='0.5'
+											name="searchRadiusInMiles"
+											thumbLabel
+											tickInterval=".5"
+											[(ngModel)]='searchRadiusInMiles'
+											[(value)]='searchRadiusInMiles'
+											(click)="radiusChange($event)"
+											(keyup)="radiusChange($event)"
+											(keydown)="radiusChange($event)"
+											>
+										</mat-slider>
+									</section>
+									<section>
+										<label>
+											<p>Select # of results to pick from:</p>
+										</label>
+										<mat-slider
+											min='10'
+											max='50'
+											step='1'
+											name="limit"
+											thumbLabel
+											tickInterval="1"
+											[(ngModel)]='newSearch.limit'
+											[(value)]='newSearch.limit'
+											>
+										</mat-slider>
+									</section>
+									<section>
+										<mat-form-field hintLabel="Categories are seperated by commas">
+											<input 
+												id="categoryInput"
+												matInput
+												name="term"
+												[(ngModel)]="newSearch.categories"
+												#categories='ngModel'
+												placeholder="Categories of food"
+											>
+										</mat-form-field>
+									</section>
+									<section>
+										<label>
+											<p>Price Range: </p>
+										</label>
+										<mat-checkbox [(ngModel)]="price1" [align]="end" [ngModelOptions]="{standalone: true}">$</mat-checkbox>
+										<mat-checkbox [(ngModel)]="price2" [align]="end" [ngModelOptions]="{standalone: true}">$$</mat-checkbox>
+										<mat-checkbox [(ngModel)]="price3" [align]="end" [ngModelOptions]="{standalone: true}">$$$</mat-checkbox>
+										<mat-checkbox [(ngModel)]="price4" [align]="end" [ngModelOptions]="{standalone: true}">$$$$</mat-checkbox>
+									</section>
+									<mat-card-actions>
+										<button mat-button (click) = "search(); searchform.reset" form='search'>Search</button>
+									</mat-card-actions>
+								</form>
+							</mat-card-content>
+						</mat-card>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class='col-xs-8'>
-			<button class="btn btn-primary center-block" (click) = "pick_again()">Pick Again</button>
-		</div>
-		<div class='col-xs-2'>
-		</div>
-	</div>
-
+	</div>	
 </div>
+

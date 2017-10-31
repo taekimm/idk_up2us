@@ -113,14 +113,13 @@ export class LandingComponent implements OnInit {
 	search(){
 		this.searched=true;
 
-		// if pick has already been made, clear the pick.
+		// resetting below variables
 		if (this.pick){
 			this.pick.setMap(null)
 		}
 		if (this.YelpList) {
 			this.YelpList = [];
 		}
-
 		if (this.businessList) {
 			this.businessList = [];
 		}
@@ -221,8 +220,8 @@ export class LandingComponent implements OnInit {
 	}
 
 	pick_again(){
+		// resetting variables
 		this.searched=false;
-
 		this.newSearch.radius = 0;
 		this.newSearch.categories = '';
 		this.newSearch.limit = 20;

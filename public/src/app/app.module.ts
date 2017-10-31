@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatButtonModule, MatCheckboxModule, MatSliderModule, MatFormFieldModule, MatGridListModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSliderModule, MatFormFieldModule, MatGridListModule, MatCardModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
@@ -26,6 +26,10 @@ import { MapsService } from './maps.service';
     MatCheckboxModule,
     MatSliderModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
     FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
